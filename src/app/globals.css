@@ -17,6 +17,7 @@
   --color-navy-50: #f1f4fa;
 
   --color-seal: #8b2e2e;
+  --color-gold: #b8863b;
 }
 
 @theme inline {
@@ -36,6 +37,7 @@
   --color-navy-50: var(--color-navy-50);
 
   --color-seal: var(--color-seal);
+  --color-gold: var(--color-gold);
 
   --font-serif-jp: var(--font-shippori-mincho);
   --font-sans-jp: var(--font-noto-sans-jp);
