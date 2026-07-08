@@ -1,0 +1,81 @@
+// 業務棚卸し台帳 - Prisma schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum Frequency {
+  DAILY // 日次
+  WEEKLY // 週次
+  MONTHLY // 月次
+  QUARTERLY // 四半期
+  YEARLY // 年次
+  ADHOC // 随時
+}
+
+enum Policy {
+  NEW // 新規
+  STRENGTHEN // 強化
+  MAINTAIN // 維持
+  REDUCE // 削減
+  DELEGATE // 委譲
+  ABOLISH // 廃止
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(MEMBER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  tasks Task[]
+
+  @@map("users")
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tasks Task[]
+
+  @@map("categories")
+}
+
+model Task {
+  id           String    @id @default(cuid())
+  name         String
+  frequency    Frequency
+  currentHours Float // 現状の月間工数(h/月)
+  policy       Policy
+  afterHours   Float // 方針適用後の想定月間工数(h/月)
+  memo         String?   @db.Text // 理由メモ
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([categoryId])
+  @@map("tasks")
+}
