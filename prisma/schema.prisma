@@ -1,0 +1,71 @@
+// 業務棚卸し台帳 - Prisma schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum Frequency {
+  DAILY // 毎日
+  WEEKLY // 毎週
+  MONTHLY // 毎月
+  QUARTERLY // 四半期
+  YEARLY // 年次
+  IRREGULAR // 不定期
+}
+
+enum Policy {
+  NEW // 新規
+  STRENGTHEN // 強化
+  MAINTAIN // 維持
+  REDUCE // 削減
+  DELEGATE // 委譲
+  ABOLISH // 廃止
+}
+
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String         @unique
+  passwordHash  String
+  role          Role           @default(MEMBER)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  businessTasks BusinessTask[]
+}
+
+model Category {
+  id            String         @id @default(cuid())
+  name          String         @unique
+  createdAt     DateTime       @default(now())
+  businessTasks BusinessTask[]
+}
+
+model BusinessTask {
+  id            String    @id @default(cuid())
+  name          String
+  frequency     Frequency
+  currentHours  Float
+  policy        Policy
+  afterHours    Float
+  note          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([categoryId])
+}
