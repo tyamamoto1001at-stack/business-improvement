@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f4ea;
+  --foreground: #262420;
+
+  --color-navy-950: #141b2d;
+  --color-navy-900: #1f2a44;
+  --color-navy-800: #2a3757;
+  --color-navy-700: #384876;
+  --color-navy-100: #e4e8f0;
+  --color-navy-50: #f2f4f8;
+
+  --color-paper: #f7f4ea;
+  --color-paper-line: #ded7c2;
+  --color-paper-card: #fffdf7;
+
+  --color-gold-600: #a9803f;
+  --color-gold-100: #f0e4c8;
+
+  --color-policy-new: #1d4e89;
+  --color-policy-new-bg: #dce8f7;
+  --color-policy-new-border: #a9c6e8;
+
+  --color-policy-strengthen: #1f6b3b;
+  --color-policy-strengthen-bg: #dfeee1;
+  --color-policy-strengthen-border: #a7d4b2;
+
+  --color-policy-maintain: #4b4b46;
+  --color-policy-maintain-bg: #e7e7e2;
+  --color-policy-maintain-border: #c9c9c0;
+
+  --color-policy-reduce: #8a5a1f;
+  --color-policy-reduce-bg: #f7e9d7;
+  --color-policy-reduce-border: #e4c08f;
+
+  --color-policy-delegate: #5b3b85;
+  --color-policy-delegate-bg: #eae1f2;
+  --color-policy-delegate-border: #c7addd;
+
+  --color-policy-abolish: #8c2e2e;
+  --color-policy-abolish-bg: #f3dcdc;
+  --color-policy-abolish-border: #e0a8a8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-navy-100: var(--color-navy-100);
+  --color-navy-50: var(--color-navy-50);
+
+  --color-paper: var(--color-paper);
+  --color-paper-line: var(--color-paper-line);
+  --color-paper-card: var(--color-paper-card);
+
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-100: var(--color-gold-100);
+
+  --color-policy-new: var(--color-policy-new);
+  --color-policy-new-bg: var(--color-policy-new-bg);
+  --color-policy-new-border: var(--color-policy-new-border);
+  --color-policy-strengthen: var(--color-policy-strengthen);
+  --color-policy-strengthen-bg: var(--color-policy-strengthen-bg);
+  --color-policy-strengthen-border: var(--color-policy-strengthen-border);
+  --color-policy-maintain: var(--color-policy-maintain);
+  --color-policy-maintain-bg: var(--color-policy-maintain-bg);
+  --color-policy-maintain-border: var(--color-policy-maintain-border);
+  --color-policy-reduce: var(--color-policy-reduce);
+  --color-policy-reduce-bg: var(--color-policy-reduce-bg);
+  --color-policy-reduce-border: var(--color-policy-reduce-border);
+  --color-policy-delegate: var(--color-policy-delegate);
+  --color-policy-delegate-bg: var(--color-policy-delegate-bg);
+  --color-policy-delegate-border: var(--color-policy-delegate-border);
+  --color-policy-abolish: var(--color-policy-abolish);
+  --color-policy-abolish-bg: var(--color-policy-abolish-bg);
+  --color-policy-abolish-border: var(--color-policy-abolish-border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui,
+    sans-serif;
+}
+
+.font-ledger {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+}
+
+.ledger-card {
+  background: var(--color-paper-card);
+  border: 1px solid var(--color-paper-line);
+  box-shadow: 0 1px 2px rgba(31, 42, 68, 0.06);
+}
+
+.ledger-table th {
+  border-bottom: 2px solid var(--color-navy-900);
+}
+
+.ledger-table td {
+  border-bottom: 1px solid var(--color-paper-line);
+}
