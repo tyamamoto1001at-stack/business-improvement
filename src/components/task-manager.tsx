@@ -6,6 +6,8 @@ import { PolicyBadge } from "@/components/policy-badge";
 import { TaskForm, type TaskFormValues } from "@/components/task-form";
 import { createTask, deleteTask, updateTask } from "@/lib/actions/tasks";
 import { FREQUENCY_LABEL } from "@/lib/frequency";
+import { formatHours } from "@/lib/format";
+import { SummaryCard } from "@/components/summary-card";
 import type { Frequency, Policy } from "@/generated/prisma/enums";
 
 export type TaskListItem = {
@@ -19,10 +21,6 @@ export type TaskListItem = {
   afterHours: number;
   note: string | null;
 };
-
-function formatHours(value: number) {
-  return `${value % 1 === 0 ? value : value.toFixed(1)}h`;
-}
 
 export function TaskManager({
   tasks,
@@ -218,32 +216,3 @@ function toFormValues(task: TaskListItem): TaskFormValues {
   };
 }
 
-function SummaryCard({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: string;
-  accent?: "positive" | "negative";
-}) {
-  return (
-    <div className="ledger-card rounded-lg p-4">
-      <p className="text-xs font-medium tracking-wide text-foreground/50">
-        {label}
-      </p>
-      <p
-        className={
-          "mt-1 font-ledger text-2xl font-bold " +
-          (accent === "positive"
-            ? "text-policy-strengthen"
-            : accent === "negative"
-              ? "text-policy-abolish"
-              : "text-navy-900")
-        }
-      >
-        {value}
-      </p>
-    </div>
-  );
-}
