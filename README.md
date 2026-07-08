@@ -72,8 +72,9 @@ npm run dev
 
 1. VercelでこのリポジトリをImportします。
 2. Environment Variablesに `DATABASE_URL` と `AUTH_SECRET` を設定します(PostgreSQLは [Vercel Postgres](https://vercel.com/storage/postgres) や [Neon](https://neon.tech) 等を利用してください)。
+   - Serverless環境から直接PostgreSQLに接続するため、コネクション数が枯渇しないようプロバイダのコネクションプーリング用URL(例: Neonの `-pooler` 付きホスト名)を指定することを推奨します。
 3. ビルドコマンドは `next build` のままで問題ありません。`prisma generate` は `postinstall` で自動実行されます。
-4. デプロイ後、初回のみマイグレーションとシードを実行してください。
+4. デプロイ後、初回のみマイグレーションとシードを実行してください(ローカルから本番の `DATABASE_URL` を指定して実行するか、Vercelのビルドフックなどで実行してください)。
 
 ```bash
 npx prisma migrate deploy
